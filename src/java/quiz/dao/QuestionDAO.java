@@ -52,5 +52,25 @@ public class QuestionDAO {
         return (int)query.getSingleResult();
         
     }
+    
+  
+    /******************THOMSAYER OPTIONNEL*******************************/
+    
+    public List<Question> compteQuestionParQuizId(long id){
+         EntityManager em = Persistence.createEntityManagerFactory("PU").createEntityManager();
+        Query query=em.createQuery("SELECT COUNT(q) FROM Question q WHERE q.quiz.id=:monId ORDER BY q.ordre" );
+        query.setParameter("monId", id);
+        return query.getResultList();
+        
+    }
+    
+     public List<Question> ListerParQuizIdEtOrdreSuperieur(long quizId, long ordreQuestionPrec) {
+        EntityManager em = Persistence.createEntityManagerFactory("PU").createEntityManager();
+        Query query=em.createQuery("SELECT q.numRepCorrecte FROM Question q WHERE q.quiz.id=:q AND q.ordre=:ordre" );
+        query.setParameter("q", quizId); 
+        query.setParameter("ordre", ordreQuestionPrec);
+        return query.getResultList();
+    
+     }
   
 }

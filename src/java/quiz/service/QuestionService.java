@@ -51,5 +51,43 @@ public class QuestionService {
         }
         return false;
     }
+   /****************************OPTIONNEL**************************/ 
+    /**
+     * 
+     * @param quizId
+     * @param ordreQuestionPrecedente: vaut zero
+     * @return  la question suivante ou null si questionnaire terminé
+     */
+    public Question recherchercherQuestionSuivante(long  quizId, byte ordreQuestionPrecedente){
+        QuestionDAO questionDAO = new QuestionDAO();
+        
+        //Recup nbre de question quiz
+        long nbQuestionQuiz = questionDAO.compteQuestionParQuizId(quizId).size();
+        //lister de question par ordre croissant
+        List<Question> listequestion =questionDAO.ListerParQuizIdEtOrdreSuperieur(quizId, nbQuestionQuiz);
+       
+        /**
+         * Si quiz est vide
+         */
+        if (nbQuestionQuiz==0) {
+            throw new RuntimeException("Le quiz est vide");
+        }
+        
+        //le quiz n'est pas vide
+        
+        
+        
+        
+        for(Question question: listequestion){
+            
+            if(question.getOrdre() > ordreQuestionPrecedente){
+                return question;
+            }
+            
+        }
+        return null;
+        
+        
+    }
 
 }

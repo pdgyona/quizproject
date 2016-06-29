@@ -30,11 +30,11 @@ public class QuestionSuivanteServlet extends HttpServlet {
         if (numQuestAct == null) {
             numQuestAct = 0;
         }
-        long idQuiz = (Long) req.getSession().getAttribute("idQuiz");
+        long idQuiz = (Long) req.getSession().getAttribute("idQuiz");//recup de l'id quiz 
         Question q = new QuestionService().trouverQuestSuiv(idQuiz, numQuestAct);
 
         if (q != null) {
-            req.getSession().setAttribute("numQuest", q.getOrdre());
+            req.getSession().setAttribute("numQuest", q.getOrdre());//recup dernier ordre session
         }
 
         if (q == null) {
