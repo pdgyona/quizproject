@@ -6,7 +6,6 @@
 package quiz.servlet;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,11 +21,12 @@ import quiz.service.QuizService;
  * @author admin
  */
 @WebServlet(name = "AjoutQuestion", urlPatterns = {"/ajout_question"})
-public class AjoutQuestion extends HttpServlet {
+public class AjoutQuestionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+        int idquiz=Integer.parseInt(req.getParameter("id2"));
+        req.getSession().setAttribute("idquiz", idquiz);
         resp.sendRedirect("AjoutQuestion.jsp");
 
     }
@@ -39,17 +39,25 @@ public class AjoutQuestion extends HttpServlet {
         String rep2 = req.getParameter("rep2");
         String rep3 = req.getParameter("rep3");
         String rep4 = req.getParameter("rep4");
+        int ordre = Integer.parseInt(req.getParameter("ordre"));
         int numrepco = Integer.parseInt(req.getParameter("numrepco"));
         
+        //Quiz quiz=(Quiz)req.getSession().getAttribute("Quiz");
+        int idquiz=(int)req.getSession().getAttribute("idquiz");
+        Quiz q=new QuizService().RecupQuiz(idquiz);
+        
         Question question=new Question();
-        Quiz quiz=(Quiz)req.getSession().getAttribute("Quiz");
+        
         question.setTitre(titre);
-        question.setQuiz(quiz);question.setRep1(rep1);question.setRep2(rep2);
+        
+        question.setRep1(rep1);question.setRep2(rep2);
         question.setRep3(rep3);question.setRep4(rep4);
+        question.setOrdre(ordre);
         question.setNumRepCorrecte(numrepco);
+        question.setQuiz(q);q.getQuestion().add(question);
         
         new QuestionService().AjouterQuestion(question);
-        req.getRequestDispatcher("RetourVersListeQuestions").forward(req, resp);
+        req.getRequestDispatcher("RetourVersListeQuiz").forward(req, resp);
     }
 
 }

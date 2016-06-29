@@ -21,7 +21,7 @@ import quiz.service.QuizService;
  * @author admin
  */
 @WebServlet(name = "QuestionSuivante", urlPatterns = {"/QuestionSuivante"})
-public class QuestionSuivante extends HttpServlet {
+public class QuestionSuivanteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

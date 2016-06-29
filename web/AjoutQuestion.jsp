@@ -16,13 +16,14 @@
        <div class="container">
            <h1>Ajouter une question</h1>
         <form method="post" action="ajout_question">
-            Titre: <input type="text" name="titre" /> <br><br>
-            Question: <input type="text" name="question" /> <br><br>
+             Question: <input type="text" name="titre" /> <br><br>
+            
 
             Reponse 1: <input type="text" name="rep1" /> <br><br>
             Reponse 2: <input type="text" name="rep2" /> <br><br>
             Reponse 3: <input type="text" name="rep3" /> <br><br>
             Reponse 4: <input type="text" name="rep4" /> <br><br>
+            ordre: <input type="text" name="ordre" /> <br><br>
             Numero Reponse correcte: <input type="number" name="numrepco" /> <br><br>
             <input type="submit" value="Envoyer" class="btn btn-success" /><br>
         </form>

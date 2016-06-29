@@ -23,7 +23,7 @@
             <tr>
                 
         <c:forEach items="${listeQuiz}" var="lq">
-            <a href="ajout_question">${lq.nom}</a> &nbsp;&nbsp;<a href=jouer_quiz?id=${lq.id}>Jouer</a> <br>
+            <a href="ajout_question?id2=${lq.id}">${lq.nom}</a> &nbsp;&nbsp;<a href=jouer_quiz?id=${lq.id}>Jouer</a> <br>
         </c:forEach>
         <c:choose >
             <c:when test="${typeUtil=='admin'}"   >
